@@ -77,6 +77,8 @@ class Parser:
             while True:
                 rec = self.get_record(f_obj)
                 # TODO: stop the loop
+                if rec is None:
+                    break
                 yield rec
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
@@ -98,6 +100,8 @@ class FastaParser(Parser):
         """
         TODO: returns the next fasta record as a 2-tuple of (header, sequence)
         """
+        header, sequence = f_obj.split(",")
+        return (header, sequence)
 
 
 class FastqParser(Parser):
@@ -108,4 +112,8 @@ class FastqParser(Parser):
         """
         TODO: returns the next fastq record as a 3-tuple of (header, sequence, quality)
         """
-
+        arr = f_obj.split("\t")
+        header = arr[0]
+        sequence = arr[1]
+        quality = arr[2]
+        return (header, sequence, quality)
