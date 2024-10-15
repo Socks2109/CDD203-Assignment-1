@@ -100,8 +100,15 @@ class FastaParser(Parser):
         """
         TODO: returns the next fasta record as a 2-tuple of (header, sequence)
         """
-        header, sequence = f_obj.split(",")
-        return (header, sequence)
+        header = ""
+        sequence = ""
+        for line in f_obj:
+            line = line.strip()
+            if line[0] == ">":
+                header = line
+            else:
+                sequence = line
+                return (header, sequence)
 
 
 class FastqParser(Parser):
@@ -112,8 +119,20 @@ class FastqParser(Parser):
         """
         TODO: returns the next fastq record as a 3-tuple of (header, sequence, quality)
         """
-        arr = f_obj.split("\t")
-        header = arr[0]
-        sequence = arr[1]
-        quality = arr[2]
-        return (header, sequence, quality)
+        header = ""
+        sequence = ""
+        quality = ""
+        checkPlus = False
+        for line in f_obj:
+            line = line.strip()
+            if line[0] == "@":
+                header = line
+            elif line[0] == "+" and len(line) == 1:
+                checkPlus = True
+                continue
+            elif checkPlus == True:
+                quality = line
+                checkPlus = False
+                return (header, sequence, quality)
+            else:
+                sequence = line

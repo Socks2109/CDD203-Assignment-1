@@ -14,53 +14,31 @@ def main():
     qparser = FastqParser('data/test.fq')
     # For each record of FastaParser, Transcribe the sequence
     # and print it to console
-    typeTranscribeFastA(aparser, transcribe)
+    print("Transcribe FastAParser:" + "\n")
+    for tup in aparser:
+        print(transcribe(tup[1]))
+    print()
 
     # For each record of FastqParser, Transcribe the sequence
     # and print it to console
-    typeTranscribeFastQ(qparser, transcribe)
+    # typeTranscribeFastQ(qparser, transcribe)
+    print("Transcribe FastQParser:" + "\n")
+    for tup in qparser:
+        print(transcribe(tup[1]))
+    print()
 
     # For each record of FastaParser, Reverse Transcribe the sequence
     # and print it to console
-    typeTranscribeFastA(aparser, reverse_transcribe)
+    print("Reverse Transcribe FastAParser:" + "\n")
+    for tup in aparser:
+        print(reverse_transcribe(tup[1]))
+    print()
     
     # For each record of FastqParser, Reverse Transcribe the sequence
     # and print it to console
-    typeTranscribeFastQ(qparser, reverse_transcribe)
-
-def typeTranscribeFastA(aparser, transcription):
-    with open('data/test.fa') as f:
-        header = ""
-        sequence = ""
-        for line in f:
-            line = line.strip()
-            if line[0] == ">":
-                header = line
-            else:
-                sequence = line
-                print(aparser._get_record(header + "," + transcription(sequence)))
-    print()
-
-def typeTranscribeFastQ(qparser, transcription):
-    with open('data/test.fq') as f:
-        header = ""
-        sequence = ""
-        quality = ""
-        checkPlus = False
-        for line in f:
-            line = line.strip()
-            if line[0] == "@":
-                header = line
-            elif line[0] == "+":
-                checkPlus = True
-                continue
-            elif checkPlus == True:
-                quality = line
-                print(qparser._get_record(header + "\t" + transcription(sequence) + "\t" + quality))
-                checkPlus = False
-            else:
-                sequence = line
-    print()
+    print("Reverse Transcribe FastQParser:" + "\n")
+    for tup in qparser:
+        print(reverse_transcribe(tup[1]))
 
 """
 When executing a python script from the command line there will
