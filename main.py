@@ -21,7 +21,6 @@ def main():
 
     # For each record of FastqParser, Transcribe the sequence
     # and print it to console
-    # typeTranscribeFastQ(qparser, transcribe)
     print("Transcribe FastQParser:" + "\n")
     for tup in qparser:
         print(transcribe(tup[1]))

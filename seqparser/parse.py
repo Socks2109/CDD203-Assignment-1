@@ -98,7 +98,10 @@ class FastaParser(Parser):
     """
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str]:
         """
-        TODO: returns the next fasta record as a 2-tuple of (header, sequence)
+        Input: f_obj -> a io.TextIOWrapper object.
+        If the file object starts with a ">", the line will be considered a header. Otherwise,
+        it is considered a sequence.
+        Return: the next fasta record as a 2-tuple of (header, sequence) by reading f_obj
         """
         header = ""
         sequence = ""
@@ -117,7 +120,16 @@ class FastqParser(Parser):
     """
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
         """
-        TODO: returns the next fastq record as a 3-tuple of (header, sequence, quality)
+        Input: f_obj -> a io.TextIOWrapper object.
+
+        This function takes a file object and returns a 3-tuple of the desired format.
+        It also checks for edge cases such as "+"s and "@"s in the quality line. If this
+        is not checked, the "+"s that start in the quality line might intefere with the
+        "+" that seperates the sequence and quality lines. The "@"s were also checked
+        in case there are "@"s in the quality line, which might get mixed up with
+        the header lines.
+
+        Return: the next fastq record as a 3-tuple of (header, sequence, quality)
         """
         header = ""
         sequence = ""

@@ -1,5 +1,5 @@
 # write tests for transcribes
-
+import pytest
 from seqparser import (
         transcribe,
         reverse_transcribe)
@@ -23,15 +23,24 @@ def test_freebie_transcribe_2():
         
 def test_transcribe():
     """
-    TODO: Write your unit test for the
-    transcribe function here.
+    Tests the transcribed sequences and makes sure it matches the result.
+    Also checks for invalid strings in the file, and makes sure an error is raised
     """
-    pass
-
+    seq = ["ACTGAACCC", "AAAAAA"]
+    result = ["UGACUUGGG", "UUUUUU"]
+    for i, gene in enumerate(seq):
+        assert transcribe(gene) == result[i]
+    with pytest.raises(Exception, match="Please check the file for invalid genomic string"):
+        transcribe("AHACTGCCC")
 
 def test_reverse_transcribe():
     """
-    TODO: Write your unit test for the
-    reverse transcribe function here.
+    Tests the reverse transcribed sequences and makes sure it matches the result.
+    Also checks for invalid strings in the file, and makes sure an error is raised.
     """
-    pass
+    seq = ["ACTGAACCC", "TCGAGTG"]
+    result = ["GGGUUCAGU", "CACUCGA"]
+    for i, gene in enumerate(seq):
+        assert reverse_transcribe(gene) == result[i]
+    with pytest.raises(Exception, match="Please check the file for invalid genomic string"):
+        transcribe("AHACTGCCC")

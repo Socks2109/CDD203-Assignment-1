@@ -3,8 +3,8 @@
 
 def transcribe(seq: str) -> str:
     """
-    TODO: transcribes DNA to RNA by generating
-    the complement sequence with T -> U replacement
+    Transcribes DNA to RNA by converting A -> U, C -> G,
+    T -> A, G -> C.
     """
     result = ""
     for i in seq:
@@ -14,14 +14,16 @@ def transcribe(seq: str) -> str:
             result += "G"
         elif (i == "T"):
             result += "A"
-        else:
+        elif (i == "G"):
             result += "C"
+        else:
+            raise Exception("Please check the file for invalid genomic string")
     return result
 
 def reverse_transcribe(seq: str) -> str:
     """
-    TODO: transcribes DNA to RNA then reverses
-    the strand
+    Transcribes DNA to RNA by converting A -> U, C -> G,
+    T -> A, G -> C, then reverses the RNA.
     """
     result = transcribe(seq)
     return result[::-1]
