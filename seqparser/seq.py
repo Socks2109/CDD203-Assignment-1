@@ -1,4 +1,6 @@
-# DNA -> RNA Transcription
+"""
+Transcribes or reverse transcribes DNA to RNA
+"""
 
 
 def transcribe(seq: str) -> str:

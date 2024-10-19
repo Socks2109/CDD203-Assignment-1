@@ -1,3 +1,9 @@
+"""
+This file prints the transcribed and reverse transcribed DNA
+in the terminal.
+"""
+
+
 from seqparser import (
         FastaParser,
         FastqParser,

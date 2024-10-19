@@ -1,4 +1,6 @@
-# write tests for parsers
+"""
+This file tests the FastaParser and FastqParser classes.
+"""
 
 from seqparser import (
         FastaParser,

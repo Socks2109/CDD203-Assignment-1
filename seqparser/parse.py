@@ -1,3 +1,8 @@
+"""
+This file parses the record into a tuple with the form of
+(header, sequence) or (header, sequence, quality)
+"""
+
 import io
 from typing import Tuple, Union
 

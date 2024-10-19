@@ -1,4 +1,7 @@
-# write tests for transcribes
+"""
+This file tests the trascribe and reverse_transcribe classes.
+"""
+
 import pytest
 from seqparser import (
         transcribe,
